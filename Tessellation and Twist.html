@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>Tessellation and Twist</title>
+
+
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+attribute vec4 vPosition;
+
+void
+main()
+{
+    gl_Position = vPosition;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+
+void
+main()
+{
+    gl_FragColor = vec4( 1.0, 0.0, 0.0, 1.0 );
+}
+</script>
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="Tessellation and Twist.js"></script>
+</head>   
+
+<body>
+<canvas id="gl-canvas" width="512" height="512">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+</body>
+
+<br>
+
+<body>
+<label for="twist-slider">Twist angle</label>
+<input id="twist-slider" type="range" min="0" max="360" step="10" value="0" onchange="twist_angle(this.value)"/>
+<span id="twist-range">0</span>
+<script type="text/javascript">
+function twist_angle(value)
+{
+	document.getElementById("twist-range").innerHTML = value;
+	angle = value;
+	generateGeometry(angle);
+	render();
+}
+</script>
+</body>
+
+<br>
+
+<body>
+<label for="tess-slider">Tessellation level</label>
+<input id="tess-slider" type="range" min="0" max="7" step="1" value="0" onchange="tess(this.value)" />
+<span id="range">0</span>
+<script type="text/javascript">
+function tess(value) 
+{
+	document.getElementById("range").innerHTML = value;
+	NumTimesToSubdivide = value;
+	generateGeometry(angle);
+	render();
+}
+</script>
+</body>
+</html>
